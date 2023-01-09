@@ -1,0 +1,48 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: wangxyper <wangxyper@163.com>
+Date: Mon, 9 Jan 2023 14:55:15 +0800
+Subject: [PATCH] Run tasks when tick start
+
+
+diff --git a/src/main/java/co/earthme/hearse/concurrent/WorkerThread.java b/src/main/java/co/earthme/hearse/concurrent/WorkerThread.java
+index 52f0c9dddf29a28cc360fbacb923445e5c3f82a6..783c8ea55095dbabe594a9fe3dc604515bd0c2f1 100644
+--- a/src/main/java/co/earthme/hearse/concurrent/WorkerThread.java
++++ b/src/main/java/co/earthme/hearse/concurrent/WorkerThread.java
+@@ -4,7 +4,6 @@ import io.papermc.paper.util.TickThread;
+ 
+ public class WorkerThread extends TickThread {
+ 
+-
+     public WorkerThread(String name) {
+         super(name);
+         this.setDaemon(true);
+diff --git a/src/main/java/co/earthme/hearse/server/ServerEntityTickHook.java b/src/main/java/co/earthme/hearse/server/ServerEntityTickHook.java
+index 8da657836933ae6080e6594ff57dff84155e1820..2c2f752e1ae846c2b24c2d46a13473836c5feac6 100644
+--- a/src/main/java/co/earthme/hearse/server/ServerEntityTickHook.java
++++ b/src/main/java/co/earthme/hearse/server/ServerEntityTickHook.java
+@@ -49,7 +49,7 @@ public class ServerEntityTickHook {
+         worker.executeWithSubTask(task,callBack);
+     }
+ 
+-    public static void callPostTick(){
++    public static void callTickStart(){
+         if (!firstTick){
+             firstTick = true;
+             return;
+diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
+index 263f4ce5be5ad06c3d2cf0af03547fe506969162..f3dc3f627ccd183a5cbb0ebc2e29309fff573305 100644
+--- a/src/main/java/net/minecraft/server/MinecraftServer.java
++++ b/src/main/java/net/minecraft/server/MinecraftServer.java
+@@ -1410,10 +1410,10 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+         //isOversleep = false;MinecraftTimings.serverOversleep.stopTiming(); // Purpur
+         // Paper end
+         new com.destroystokyo.paper.event.server.ServerTickStartEvent(this.tickCount+1).callEvent(); // Paper
+-
++        ServerEntityTickHook.callTickStart();
+         ++this.tickCount;
+         this.tickChildren(shouldKeepTicking);
+-        ServerEntityTickHook.callPostTick();
++
+         if (i - this.lastServerStatus >= 5000000000L) {
+             this.lastServerStatus = i;
+             this.status.setPlayers(new ServerStatus.Players(this.getMaxPlayers(), this.getPlayerCount()));
