@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: wangxyper <wangxyper@163.com>
 Date: Wed, 11 Jan 2023 11:29:51 +0800
-Subject: [PATCH] Fix some a stupid error
+Subject: [PATCH] Fix some stupid errors
 
 
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java

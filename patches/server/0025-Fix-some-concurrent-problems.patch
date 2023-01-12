@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: wangxyper <wangxyper@163.com>
 Date: Wed, 11 Jan 2023 11:00:38 +0800
-Subject: [PATCH] Fix some a concurrent problem
+Subject: [PATCH] Fix some concurrent problems
 
 
 diff --git a/src/main/java/net/minecraft/world/entity/ai/goal/GoalSelector.java b/src/main/java/net/minecraft/world/entity/ai/goal/GoalSelector.java
