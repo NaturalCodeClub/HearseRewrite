@@ -1,0 +1,43 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: wangxyper <wangxyper@163.com>
+Date: Thu, 12 Jan 2023 16:08:30 +0800
+Subject: [PATCH] Fix some NPE errors
+
+
+diff --git a/src/main/java/net/minecraft/world/entity/LivingEntity.java b/src/main/java/net/minecraft/world/entity/LivingEntity.java
+index 5d19d4512cd653815fc944b7f89e01b4b1c508cb..cde866a2bb4fa503dccb21ef88ece9777a546fcc 100644
+--- a/src/main/java/net/minecraft/world/entity/LivingEntity.java
++++ b/src/main/java/net/minecraft/world/entity/LivingEntity.java
+@@ -2014,6 +2014,10 @@ public abstract class LivingEntity extends Entity {
+             BlockPos blockposition = this.blockPosition();
+             BlockState iblockdata = this.getFeetBlockState();
+ 
++            if (iblockdata == null){
++                return false;
++            }
++
+             if (iblockdata.is(BlockTags.CLIMBABLE)) {
+                 this.lastClimbablePos = Optional.of(blockposition);
+                 return true;
+diff --git a/src/main/java/net/minecraft/world/level/gameevent/EuclideanGameEventListenerRegistry.java b/src/main/java/net/minecraft/world/level/gameevent/EuclideanGameEventListenerRegistry.java
+index 0c308e12f9b590fa169babac487c8adc7e3f823c..b61ed4d03848f86ca5e93b0374bbf4ca05369ad2 100644
+--- a/src/main/java/net/minecraft/world/level/gameevent/EuclideanGameEventListenerRegistry.java
++++ b/src/main/java/net/minecraft/world/level/gameevent/EuclideanGameEventListenerRegistry.java
+@@ -5,12 +5,16 @@ import com.google.common.collect.Sets;
+ 
+ import java.util.*;
+ 
++import it.unimi.dsi.fastutil.objects.ObjectArrayList;
++import it.unimi.dsi.fastutil.objects.ObjectList;
++import it.unimi.dsi.fastutil.objects.ObjectLists;
++import net.himeki.mcmtfabric.parallelised.ConcurrentDoublyLinkedList;
+ import net.minecraft.network.protocol.game.DebugPackets;
+ import net.minecraft.server.level.ServerLevel;
+ import net.minecraft.world.phys.Vec3;
+ 
+ public class EuclideanGameEventListenerRegistry implements GameEventListenerRegistry {
+-    private final List<GameEventListener> listeners = Collections.synchronizedList(Lists.newArrayList());
++    private final List<GameEventListener> listeners = new ConcurrentDoublyLinkedList<>();
+     private final Set<GameEventListener> listenersToRemove = Sets.newConcurrentHashSet();
+     private final List<GameEventListener> listenersToAdd = Lists.newCopyOnWriteArrayList();
+     private boolean processing;
