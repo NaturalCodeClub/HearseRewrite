@@ -1,9 +1,31 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: wangxyper <wangxyper@163.com>
-Date: Wed, 11 Jan 2023 09:10:02 +0800
+Date: Sun, 8 Jan 2023 20:21:23 +0800
 Subject: [PATCH] Rebrand
 
 
+diff --git a/build.gradle.kts b/build.gradle.kts
+index d5b7458f6b79addf1a12eb82443ba5bdbe2ea5d3..ee14c871b36af98cd1e3d57249ca6cb7f9ce635a 100644
+--- a/build.gradle.kts
++++ b/build.gradle.kts
+@@ -7,7 +7,7 @@ plugins {
+ }
+ 
+ dependencies {
+-    implementation(project(":purpur-api")) // Purpur
++    implementation(project(":hearse-api")) // Purpur //Hearse
+     // Pufferfish start
+     implementation("io.papermc.paper:paper-mojangapi:1.19.3-R0.1-SNAPSHOT") {
+         exclude("io.papermc.paper", "paper-api")
+@@ -83,7 +83,7 @@ tasks.jar {
+         attributes(
+             "Main-Class" to "org.bukkit.craftbukkit.Main",
+             "Implementation-Title" to "CraftBukkit",
+-            "Implementation-Version" to "git-Purpur-$implementationVersion", // Purpur
++            "Implementation-Version" to "git-Hearse-$implementationVersion", // Purpur //Hearse
+             "Implementation-Vendor" to date, // Paper
+             "Specification-Title" to "Bukkit",
+             "Specification-Version" to project.version,
 diff --git a/src/main/java/com/destroystokyo/paper/Metrics.java b/src/main/java/com/destroystokyo/paper/Metrics.java
 index 9713263c3bd34ab8a3bfc0a8797ba0b1b88ed733..f9aaee5ed62b9a0cb6056c7d873864faadcbdfc4 100644
 --- a/src/main/java/com/destroystokyo/paper/Metrics.java
@@ -78,11 +100,50 @@ index fba5dbdb7bcbb55400ef18342c9b54612972a718..dd5f91a3bbb3a6bef1d8e05bdbb5ceb6
          switch (distance) {
              case -1:
                  return Component.text("* Error obtaining version information", NamedTextColor.RED); // Purpur
+diff --git a/src/main/java/com/destroystokyo/paper/console/PaperConsole.java b/src/main/java/com/destroystokyo/paper/console/PaperConsole.java
+index 3cb56595822799926a8141e60a42f5d1edfc6de5..eae6af434ef62e5aa2d8f9fdae3a7b66991f1f74 100644
+--- a/src/main/java/com/destroystokyo/paper/console/PaperConsole.java
++++ b/src/main/java/com/destroystokyo/paper/console/PaperConsole.java
+@@ -17,7 +17,7 @@ public final class PaperConsole extends SimpleTerminalConsole {
+     @Override
+     protected LineReader buildReader(LineReaderBuilder builder) {
+         builder
+-                .appName("Purpur") // Purpur
++                .appName("Hearse") // Purpur // Hearse
+                 .variable(LineReader.HISTORY_FILE, java.nio.file.Paths.get(".console_history"))
+                 .completer(new ConsoleCommandCompleter(this.server))
+                 .option(LineReader.Option.COMPLETE_IN_WORD, true);
+diff --git a/src/main/java/net/minecraft/CrashReport.java b/src/main/java/net/minecraft/CrashReport.java
+index b5b6657e52e4f7a630229bd3ba433438af293e22..7860b059a9d374ab11e0bbd77fb555e8ba57d457 100644
+--- a/src/main/java/net/minecraft/CrashReport.java
++++ b/src/main/java/net/minecraft/CrashReport.java
+@@ -125,7 +125,7 @@ public class CrashReport {
+         stringbuilder.append("---- Minecraft Crash Report ----\n");
+         // Purpur start
+         stringbuilder.append("// ");
+-        stringbuilder.append("// DO NOT REPORT THIS TO PAPER! REPORT TO PURPUR INSTEAD!");
++        stringbuilder.append("// DO NOT REPORT THIS TO PAPER or PURPUR! REPORT TO HEARSE INSTEAD!");
+         // Purpur end
+         stringbuilder.append("// ");
+         stringbuilder.append(CrashReport.getErrorComment());
+diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
+index cea4447aad2d64db56a76e4ba180dc7326d2e13b..e70a0b5938ad708cc430a52eb57c294ea2af58cc 100644
+--- a/src/main/java/net/minecraft/server/MinecraftServer.java
++++ b/src/main/java/net/minecraft/server/MinecraftServer.java
+@@ -927,7 +927,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+         shutdownThread = Thread.currentThread();
+         org.spigotmc.WatchdogThread.doStop(); // Paper
+         if (!isSameThread()) {
+-            MinecraftServer.LOGGER.info("Stopping main thread (Ignore any thread death message you see! - DO NOT REPORT THREAD DEATH TO PURPUR)"); // Purpur
++            MinecraftServer.LOGGER.info("Stopping main thread (Ignore any thread death message you see! - DO NOT REPORT THREAD DEATH TO PAPER or PURPUR! REPORT TO HEARSE INSTEAD!)"); // Purpur // Hearse
+             while (this.getRunningThread().isAlive()) {
+                 this.getRunningThread().stop();
+                 try {
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index f37b2b216ffe9d2e36f05f5c977f0deacc1c6a74..5e7f65e64538ccf38106833400eb052875df195a 100644
+index b69634a5cf57e4086e644819f68638d6a2ab897c..7a63ab09c8f68cad0066a4164fff78e8af396549 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -263,7 +263,7 @@ import javax.annotation.Nullable; // Paper
+@@ -262,7 +262,7 @@ import javax.annotation.Nullable; // Paper
  import javax.annotation.Nonnull; // Paper
  
  public final class CraftServer implements Server {
@@ -91,6 +152,32 @@ index f37b2b216ffe9d2e36f05f5c977f0deacc1c6a74..5e7f65e64538ccf38106833400eb0528
      private final String serverVersion;
      private final String bukkitVersion = Versioning.getBukkitVersion();
      private final Logger logger = Logger.getLogger("Minecraft");
+diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java
+index ddec0b7470e5a925ad6247970269f3654792ab25..af6b2905a3ac49ddfbf7aad4133dffde3ae242e3 100644
+--- a/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java
++++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java
+@@ -877,7 +877,7 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
+             return EntityCategory.WATER;
+         }
+ 
+-        throw new UnsupportedOperationException("Unsupported monster type: " + type + ". This is a bug, report this to Purpur."); // Purpur
++        throw new UnsupportedOperationException("Unsupported monster type: " + type + ". This is a bug, report this to Hearse."); // Purpur // Hearse
+     }
+ 
+     @Override
+diff --git a/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java b/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java
+index 5402098dce0d64d3dceea51f248d7d366850a74f..f522fcfab9b3ea39874cfbcdac9d0acf0b22d8a9 100644
+--- a/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java
++++ b/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java
+@@ -504,7 +504,7 @@ public class CraftScheduler implements BukkitScheduler {
+                 this.parsePending();
+             } else {
+                 //this.debugTail = this.debugTail.setNext(new CraftAsyncDebugger(currentTick + CraftScheduler.RECENT_TICKS, task.getOwner(), task.getTaskClass())); // Paper
+-                task.getOwner().getLogger().log(Level.SEVERE, "Unexpected Async Task in the Sync Scheduler. Report this to Purpur"); // Paper // Purpur
++                task.getOwner().getLogger().log(Level.SEVERE, "Unexpected Async Task in the Sync Scheduler. Report this to Hearse"); // Paper // Purpur // Hearse
+                 // We don't need to parse pending
+                 // (async tasks must live with race-conditions if they attempt to cancel between these few lines of code)
+             }
 diff --git a/src/main/java/org/bukkit/craftbukkit/util/Versioning.java b/src/main/java/org/bukkit/craftbukkit/util/Versioning.java
 index fb87620c742ff7912f5e8ccd2a7930dd605576d9..8c727afbb6730718497e230fdf6f4ff4839b3349 100644
 --- a/src/main/java/org/bukkit/craftbukkit/util/Versioning.java
