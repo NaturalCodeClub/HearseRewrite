@@ -30,10 +30,10 @@ index 8da657836933ae6080e6594ff57dff84155e1820..2c2f752e1ae846c2b24c2d46a1347383
              firstTick = true;
              return;
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 263f4ce5be5ad06c3d2cf0af03547fe506969162..f3dc3f627ccd183a5cbb0ebc2e29309fff573305 100644
+index 6b75c47cc7b4e9843b279168b8533864299ccd94..977ec9578bf1f6d9d0c3a6e1172c0889ff34ad3a 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
-@@ -1410,10 +1410,10 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -1411,10 +1411,10 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
          //isOversleep = false;MinecraftTimings.serverOversleep.stopTiming(); // Purpur
          // Paper end
          new com.destroystokyo.paper.event.server.ServerTickStartEvent(this.tickCount+1).callEvent(); // Paper

@@ -117,7 +117,7 @@ index 0000000000000000000000000000000000000000..5670fdae5d16cbbdf605df048ae25320
 +    }
 +}
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 579c5618952cbb12e9f22609612128452781fdce..6fdf48da243569fe0f8e16a2983c34ee6ba163d4 100644
+index ab4556e1185e2fd9d24025baf574168bb6a5914b..74979db25eb4850e771c23d063d0b82965e32e12 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
 @@ -3,6 +3,7 @@ package net.minecraft.server;

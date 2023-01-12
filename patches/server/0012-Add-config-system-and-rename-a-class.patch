@@ -161,7 +161,7 @@ index 524a55c3298a079e416c742641af55725a602a2b..8da657836933ae6080e6594ff57dff84
      }
  }
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 84a8f884610f5e0b6948a2d35ff7a2f5a5be5c63..263f4ce5be5ad06c3d2cf0af03547fe506969162 100644
+index 47e7b07d10a3ed27f595964b49d6494956ca4072..6b75c47cc7b4e9843b279168b8533864299ccd94 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
 @@ -1,11 +1,9 @@
@@ -226,7 +226,15 @@ index 84a8f884610f5e0b6948a2d35ff7a2f5a5be5c63..263f4ce5be5ad06c3d2cf0af03547fe5
      }
      // CraftBukkit end
  
-@@ -1423,7 +1413,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -925,6 +915,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+         }
+         if (!hasLoggedStop && isDebugging()) io.papermc.paper.util.TraceUtil.dumpTraceForThread("Server stopped"); // Paper
+         // Paper start - kill main thread, and kill it hard
++        HearseConfig.save(); //Hearse
+         shutdownThread = Thread.currentThread();
+         org.spigotmc.WatchdogThread.doStop(); // Paper
+         if (!isSameThread()) {
+@@ -1423,7 +1414,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
  
          ++this.tickCount;
          this.tickChildren(shouldKeepTicking);

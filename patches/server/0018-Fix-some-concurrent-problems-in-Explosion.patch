@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: wangxyper <wangxyper@163.com>
 Date: Tue, 10 Jan 2023 12:50:27 +0800
-Subject: [PATCH] Fix some concurrent problem in Explosion
+Subject: [PATCH] Fix some concurrent problems in Explosion
 
 
 diff --git a/src/main/java/net/minecraft/Util.java b/src/main/java/net/minecraft/Util.java
