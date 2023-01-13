@@ -5,7 +5,7 @@ Subject: [PATCH] Remove some lock in ChunkEntitySlices
 
 
 diff --git a/src/main/java/io/papermc/paper/world/ChunkEntitySlices.java b/src/main/java/io/papermc/paper/world/ChunkEntitySlices.java
-index 29d6b6a8372c0c9e5ebff4e61ce7f519f0aac940..71d6a399898402139550830605181b94a60f028c 100644
+index 1012b8d1d192a946b0982c88c12a0fc0e6051972..b2eb6feffb2191c450175547c1371623ce5185eb 100644
 --- a/src/main/java/io/papermc/paper/world/ChunkEntitySlices.java
 +++ b/src/main/java/io/papermc/paper/world/ChunkEntitySlices.java
 @@ -191,15 +191,19 @@ public final class ChunkEntitySlices {

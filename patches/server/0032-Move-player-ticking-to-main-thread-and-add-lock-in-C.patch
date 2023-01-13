@@ -27,7 +27,7 @@ index 9d26ff7d07f1e972f1720f5b2d0e66d4c9c3f1e5..86f8afd54c0cbb449403c3f43e6880ad
              return;
          }
 diff --git a/src/main/java/io/papermc/paper/world/ChunkEntitySlices.java b/src/main/java/io/papermc/paper/world/ChunkEntitySlices.java
-index 8a232ed3ff5845518f098d3d89e2116233a279ab..29d6b6a8372c0c9e5ebff4e61ce7f519f0aac940 100644
+index ae22ca9ea5fd3d78d8c5bf9f1ab96f1129fddc11..1012b8d1d192a946b0982c88c12a0fc0e6051972 100644
 --- a/src/main/java/io/papermc/paper/world/ChunkEntitySlices.java
 +++ b/src/main/java/io/papermc/paper/world/ChunkEntitySlices.java
 @@ -33,7 +33,7 @@ public final class ChunkEntitySlices {
