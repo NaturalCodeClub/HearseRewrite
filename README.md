@@ -12,7 +12,7 @@
 
 ## Features
 - Fork of [Purpur](https://github.com/PurpurMC/Purpur) for better performance.
-- Parallel entity ticking(Half of async)(In alpha)
+- Parallel entity ticking(Half of async)(In beta)
 - Parallel world ticking
 - Some fixes
 
